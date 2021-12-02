@@ -3,8 +3,8 @@ import os
 import requests as rq
 from constants import DIRECTORY, ALL_ENDPOINTS
 
-# -----------------------------------------Low-level functions---------------------------------------------
 
+# -----------------------------------------Low-level functions---------------------------------------------
 
 def get_json(url: str, parameters: dict = None, headers: dict = None) -> rq.Response:
     """
@@ -46,15 +46,16 @@ def json_from_file(file_name: str, directory: str = DIRECTORY) -> dict:
 
     return query_dict
 
+
 # ------------------------------------------Higher-level functions-----------------------------------
 
-
 def get_response_from_endpoint_and_store_json(endpoint_parameters: dict) -> None:
-    """Makes get requests to provided API endpoints using provided parameters
-    and saves the JSON responses.
+    """
+    Makes get requests to provided API endpoints using provided parameters and saves 
+    the JSON responses. See the below for necessary key names and value examples.
 
     parameter:
-        endpoint parameters: dict   {
+        endpoint_parameters: dict   {
                                      'file': 'filename.json'
                                      'endpoint': 'https://api/search'
                                      'params': dict(query_parameters)
