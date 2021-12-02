@@ -12,7 +12,8 @@ FOURSQUARE_HEADERS = {
 FOURSQUARE_PARAMS = {
     'll': '45.429123,-75.691283',  # ~center of Google's ByWard Market area
     'radius': 330,                 # int, in meters
-    'category': '13065',           # restaurants
+    'categories': '13065',         # restaurants
+    'fields': 'name,rating,stats,price,tastes',
     'limit': 50                    # 50 is the most a 'Places' search will return
 }
 FOURSQUARE_DICT = {
