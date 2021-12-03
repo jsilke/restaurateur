@@ -33,20 +33,6 @@ def store_response_json(json_object: dict, file_name: str,
         json.dump(json_object, _json_file, sort_keys=True, indent=4)
 
 
-def json_from_file(file_name: str, directory: str = DIRECTORY) -> dict:
-    """
-    Retrieve a JSON object from a file.
-    """
-    _PATH = f'{directory}{file_name}'  # Concatenate the directory and file name.
-    try:
-        with open(_PATH) as json_file:
-            query_dict = json.load(json_file)
-    except FileNotFoundError:
-        print(f'{_PATH} does not exist!')
-
-    return query_dict
-
-
 # ------------------------------------------Higher-level functions-----------------------------------
 
 def get_response_from_endpoint_and_store_json(endpoint_parameters: dict) -> None:
