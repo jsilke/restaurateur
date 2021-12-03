@@ -22,6 +22,12 @@ FOURSQUARE_DICT = {
     'params': FOURSQUARE_PARAMS,
     'headers': FOURSQUARE_HEADERS
 }
+FOURSQUARE_LEGEND_DISCREPANCIES = {
+    'Source': 'Foursquare',
+    'Type': 'tastes',
+    # This will need further processing.
+    'RatingCount': 'stats'
+}
 
 # ---------------------------------Yelp Fusion API-----------------------------------------------
 
@@ -40,6 +46,10 @@ YELP_DICT = {
     'params': YELP_PARAMS,
     'headers': YELP_HEADERS
 }
+YELP_LEGEND_DISCREPANCIES = {
+    'Source': 'Yelp',
+    'Type': 'categories'
+}
 
 # ------------------------------------Google Place Search API-----------------------------------
 
@@ -54,6 +64,11 @@ GOOGLE_DICT = {
     'file': 'Google_restaurants.json',
     'endpoint': GOOGLE_ENDPOINT,
     'params': GOOGLE_PARAMS
+}
+GOOGLE_LEGEND_DISCREPANCIES = {
+    'Source': 'Google',
+    'Price': 'price_level',
+    'RatingCount': 'user_ratings_total'
 }
 
 
