@@ -14,6 +14,7 @@ def get_json(url: str, parameters: dict = None, headers: dict = None) -> rq.Resp
     _response = rq.get(url, params=parameters, headers=headers)
 
     if _response.status_code == 200:
+        print(_response.headers)
         return _response.json()
 
     print(f'API returned: {_response.status_code}')

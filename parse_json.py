@@ -1,3 +1,4 @@
+from numpy import integer
 from constants import DIRECTORY, FOURSQUARE_LEGEND_DISCREPANCIES, YELP_LEGEND_DISCREPANCIES, GOOGLE_LEGEND_DISCREPANCIES
 import json
 import pandas as pd
@@ -57,11 +58,28 @@ def parse_object_to_df(json_object: dict, results_key: str = 'results', legend_d
     return pd.DataFrame.from_dict(_pre_df)
 
 
+def post_process_series(column: pd.Series, key: str = 'total_ratings') -> pd.Series:
+    """
+    Takes in a column (Series) and a key, converts the column to a dictionary 
+    and applies the key to each element to get the nested values. Returns the
+    processed column.
+    """
+    _temp = column.to_dict()
+    for integer, element in _temp.items():
+        if element:
+            # For elements that aren't None, get the nested values.
+            _temp[integer] = element.get(key)
+
+    return pd.Series(_temp)
+
+
 def main():
     # ----------------------------------Preview Foursquare-----------------------------------
     # json_obj = json_from_file('Foursquare_restaurants.json')
     # df = parse_object_to_df(
     #     json_obj, legend_discrepencies=FOURSQUARE_LEGEND_DISCREPANCIES)
+    # # extra processing step for ratings, just need to cooerce them to int somehow...or not.
+    # df['RatingCount'] = post_process_series(df['RatingCount'])
     # print(df.head(10))
 
     # ------------------------------------Preview Yelp--------------------------------------
