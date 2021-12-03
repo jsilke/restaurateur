@@ -10,14 +10,15 @@ FOURSQUARE_HEADERS = {
     'Authorization': os.getenv('foursquare')
 }
 FOURSQUARE_PARAMS = {
+    # 'cursor': 'c3I6NTA',  # NOTE Pagination needs cursor from header link
     'll': '45.429123,-75.691283',  # ~center of Google's ByWard Market area
     'radius': 330,                 # int, in meters
     'categories': '13065',         # restaurants
-    'fields': 'name,rating,stats,price,tastes',
+    'fields': 'name,location,rating,stats,price,tastes',
     'limit': 50                    # 50 is the most a 'Places' search will return
 }
 FOURSQUARE_DICT = {
-    'file': 'Foursquare_restaurants.json',
+    'file': 'Foursquare_restaurants_p1.json',  # NOTE PAGINATION
     'endpoint': FOURSQUARE_ENDPOINT,
     'params': FOURSQUARE_PARAMS,
     'headers': FOURSQUARE_HEADERS
@@ -61,7 +62,7 @@ GOOGLE_PARAMS = {
     'key': os.getenv('google_maps_key')
 }
 GOOGLE_DICT = {
-    'file': 'Google_restaurants.json',
+    'file': 'Google_restaurants_p1.json',  # NOTE Pagination
     'endpoint': GOOGLE_ENDPOINT,
     'params': GOOGLE_PARAMS
 }
