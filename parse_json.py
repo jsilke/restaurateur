@@ -1,5 +1,9 @@
-from numpy import integer
-from constants import DIRECTORY, FOURSQUARE_LEGEND_DISCREPANCIES, YELP_LEGEND_DISCREPANCIES, GOOGLE_LEGEND_DISCREPANCIES
+from constants import (
+    DIRECTORY,
+    FOURSQUARE_LEGEND_DISCREPANCIES,
+    YELP_LEGEND_DISCREPANCIES,
+    GOOGLE_LEGEND_DISCREPANCIES,
+)
 import json
 import pandas as pd
 
@@ -8,17 +12,19 @@ def json_from_file(file_name: str, directory: str = DIRECTORY) -> dict:
     """
     Retrieve a JSON object from a file.
     """
-    _PATH = f'{directory}{file_name}'  # Concatenate the directory and file name.
+    _PATH = f"{directory}{file_name}"  # Concatenate the directory and file name.
     try:
         with open(_PATH) as json_file:
             query_dict = json.load(json_file)
     except FileNotFoundError:
-        print(f'{_PATH} does not exist!')
+        print(f"{_PATH} does not exist!")
 
     return query_dict
 
 
-def parse_object_to_df(json_object: dict, results_key: str = 'results', legend_discrepencies: dict = None) -> pd.DataFrame:
+def parse_object_to_df(
+    json_object: dict, results_key: str = "results", legend_discrepencies: dict = None
+) -> pd.DataFrame:
     """
     Takes in a JSON object, key to the results list, and a legend which is applied to extract
     the desired data. The resulting object is then converted to a pandas DataFrame and returned.
@@ -29,12 +35,12 @@ def parse_object_to_df(json_object: dict, results_key: str = 'results', legend_d
         legend_exceptions: dict = dict('column_key': 'json_key_to_replace')
     """
     _legend_template = {
-        'Name': 'name',
-        'Price': 'price',
-        'Type': 'types',
-        'Rating': 'rating',
-        'RatingCount': 'review_count',
-        'Source': 'unknown'
+        "Name": "name",
+        "Price": "price",
+        "Type": "types",
+        "Rating": "rating",
+        "RatingCount": "review_count",
+        "Source": "unknown",
     }
 
     # Adjust discrepencies in the key names of the data to be parsed
@@ -50,7 +56,7 @@ def parse_object_to_df(json_object: dict, results_key: str = 'results', legend_d
         _current = _key_list.pop()
         # Use the corresponding key_value pairs in the legend to add to the column.
         for column_key, json_key in _legend_template.items():
-            if column_key != 'Source':
+            if column_key != "Source":
                 _pre_df[column_key].append(_current.get(json_key))
             else:
                 _pre_df[column_key].append(json_key)
@@ -58,9 +64,9 @@ def parse_object_to_df(json_object: dict, results_key: str = 'results', legend_d
     return pd.DataFrame.from_dict(_pre_df)
 
 
-def post_process_series(column: pd.Series, key: str = 'total_ratings') -> pd.Series:
+def post_process_series(column: pd.Series, key: str = "total_ratings") -> pd.Series:
     """
-    Takes in a column (Series) and a key, converts the column to a dictionary 
+    Takes in a column (Series) and a key, converts the column to a dictionary
     and applies the key to each element to get the nested values. Returns the
     processed column.
     """
@@ -97,5 +103,5 @@ def main():
     pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
